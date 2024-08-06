@@ -1,0 +1,37 @@
+.section-card {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    max-width: 25%;
+    max-height: 50%;
+    margin: 50px 30px;
+    padding-bottom: 50px;
+    background-color: white;
+    box-shadow: 1px 1px 10px rgb(162, 161, 161);
+}
+
+.card img {
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    display: block;
+    box-shadow: 1px 1px 10px rgb(162, 161, 161);
+}
+
+.card .quotes {
+    margin: 30px;
+    text-align: justify;
+}
+
+.card .author {
+    margin: 30px;
+    text-align: end;
+}
+
+.card .star {
+    margin: -20px 30px;
+    text-align: end;
+}

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../data/image/logo.png">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="../data/css/nav.css">
+    <link rel="stylesheet" href="../data/css/index.css">
+    <link rel="stylesheet" href="../data/css/card.css">
+</head>
+
+<body>
+    <!-- Start Navbar -->
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-2" href="/profile">
+                <img src="../data/image/logo.png" alt="" style="width: 50px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse hovers" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item fs-5 ms-2">
+                        <a class="nav-link hovers hover active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item fs-5 ms-2">
+                        <a class="nav-link hovers hover" href="/project">Project</a>
+                    </li>
+                    <li class="nav-item fs-5 ms-2">
+                        <a class="nav-link hovers hover" href="/testimonial">Testimonial</a>
+                    </li>
+                </ul>
+                {{#if isLogin}}
+                <div class="btn-group end-btn">
+                    <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="/uploadImage/{{user.image}}" class="rounded-circle" style="width: 30px; height: 30px"
+                            alt="...">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="width: 250px;">
+                        <li class="d-flex ms-2 mt-3">
+                            <img src="/uploadImage/{{user.image}}" class="rounded-circle"
+                                style="width: 50px; height: 50px" alt="...">
+                            <p class="ms-3">{{user.name}} <br> {{user.email}}</p>
+                        </li>
+                        <li>
+                            <hr>
+                        </li>
+                        <li class="ms-2 mb-2">
+                            <a class="text-decoration-none text-dark contact" href="/profile">
+                                <i class="fa-solid fa-user me-2"></i> Profile
+                            </a>
+                        </li>
+                        <li class="ms-2 mb-2">
+                            <a class="text-decoration-none text-dark contact" href="/change">
+                                <i class="fa-solid fa-lock me-2"></i> Change Password
+                            </a>
+                        </li>
+                        <li class="ms-2 mb-2">
+                            <a class="text-decoration-none text-dark contact" href="/contact">
+                                <i class="fa-solid fa-address-book me-2"></i> Contact Me
+                            </a>
+                        </li>
+                        <li>
+                            <hr>
+                        </li>
+                        <li class="ms-2 mb-2">
+                            <a class="text-decoration-none text-dark contact" href="/logout">
+                                <i class="fa-solid fa-arrow-right-from-bracket me-2"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {{else}}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="../data/image/none.jpg" class="rounded-circle" style="width: 30px; height: 30px"
+                            alt="...">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="width: 250px;">
+                        <li class="d-flex ms-2 mt-3">
+                            <img src="../data/image/none.jpg" class="rounded-circle" style="width: 50px; height: 50px"
+                                alt="...">
+                            <p class="ms-3">Not Listed <br> Not Listed@game.com</p>
+                        </li>
+                        <li>
+                            <hr>
+                        </li>
+                        <li class="ms-3 mb-2 d-flex gap-4">
+                            <a class="text-decoration-none text-dark contact" href="/register">
+                                <i class="fa-regular fa-address-card me-2"></i> Register
+                            </a>
+                            <a class="text-decoration-none text-dark contact" href="/login">
+                                <i class="fa-solid fa-id-card me-2"></i> Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </nav>
+
+    <!-- End Navbar -->
+    <!-- Start Card -->
+
+    <div class="card m-auto mt-5 shadow-lg p-4 mb-5 bg-body-tertiary rounded-3 border-0" style="max-width: 70%;">
+        <div class="row g-0">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h1 class="card-title fw-bold">Hi Welcome to My Hut</h1>
+                    <p class="card-text align-items-justify me-4 mt-3" style="text-align: justify;">Lorem ipsum dolor
+                        sit amet consectetur adipisicing elit. Eligendi, doloremque officiis. Inventore ab omnis soluta,
+                        doloremque earum voluptatum maxime dolore voluptatibus nesciunt alias aut neque! Eveniet soluta,
+                        quod cum, consequatur fugiat adipisci commodi voluptate ea quibusdam itaque delectus laudantium
+                        recusandae. Beatae officiis quas iste ducimus repellendus optio. Inventore, fuga aliquid?</p>
+                    <div class="d-flex mt-5">
+                        <a href="/contact"><input class="btn btn-dark rounded-pill px-4 fw-bold contact" type="submit"
+                                value="Contact"></a>
+                        <a href="" class="column align-items-center ms-3 text-black d-flex">
+                            Download CV <i class="fa-solid fa-download fa-beat ms-3"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="social-media mx-auto d-flex align-items-center">
+                    <a href="#"><img src="../data/image/in.png" alt="" class="linkedin"></a>
+                    <a href="#"><img src="../data/image/ig.png" alt="" class="ig"></a>
+                    <a href="#"><img src="../data/image/fb.png" alt="" class="fb"></a>
+                    <a href="#"><img src="../data/image/twt.png" alt="" class="twt"></a>
+                </div>
+            </div>
+            <div class="col-md-4 card shadow bg-body-tertiary rounded border-0">
+                <img src="../data/image/profile2.jpg" class="img-fluid rounded-top" alt="...">
+                <h5 class="text-center fw-bold mt-3">Handika Alexandria Diaz</h5>
+                <p class="text-center">Fullstack Developer</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Card -->
+    <!-- Start Project Card -->
+
+    {{#if isLogin}}
+    <h1 class="new-title mx-auto text-center" id="back">My Project</h1>
+    <div class="new-page" id="">
+        {{#each data}}
+        <div class="cards" style="min-height: 620px;">
+            <a href="/project-detail/{{this.id}}">
+                <img src="/uploadImage/{{this.image}}" style="min-height: 400px;" alt="">
+            </a>
+            <a class="text-decoration-none text-dark" href="/project-detail/{{this.id}}">
+                <h1>{{this.title}}</h1>
+            </a>
+            <p class="text-secondary">Durasi : {{this.duration}}</p>
+            <p>{{this.description}}</p>
+            <div class="image-card">
+                <img src="image/ps.png" alt="">
+                <img src="image/android.png" alt="">
+                <img src="image/java.png" alt="">
+            </div>
+            <p class="text-end text-secondary post-time" data-post-time="{{this.created_at}}"></p>
+            <div class="button-card d-flex">
+                <a href="/edit/{{this.id}}" class="edit-card col" >Edit</a>
+                <a href="/delete/{{this.id}}" class="delete-card col">Delete</a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    <!-- End Project Card -->
+    <!-- Start Script -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="../data/js/time.js"></script>
+
+    <!-- End Script -->
+</body>
+
+</html>

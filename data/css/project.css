@@ -1,0 +1,27 @@
+.form {
+    margin-top: 40px;
+}
+
+/* Checkbox */
+.flex-check {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.flex-check .flex-box{
+    width: 50%;
+    display: flexbox;
+    margin-right: 37%;
+}
+
+.flex-check .flex-box label {
+    display: flex;
+    width: 50%;
+    padding-right: 50%;
+}
+
+.flex-check .flex-box label input{
+    box-shadow: none;
+}
+/* Checkbox */

@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+body {
+    background-color: rgb(234, 234, 234);
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+}
+
+.linkedin {
+    width: 90px;
+    transition: width 0.5s;
+}
+
+.linkedin:hover {
+    width: 80px;
+    transition: 0.5s;
+}
+
+.ig {
+    width: 65px; 
+    margin-right: 10px;
+    transition: width 0.5s;
+}
+
+.ig:hover {
+    width: 55px; 
+    transition: 0.5s;
+}
+
+.fb {
+    width: 60px; 
+    margin-right: 20px;
+    transition: width 0.5s;
+}
+
+.fb:hover {
+    width: 50px; 
+    transition: 0.5s;
+}
+
+.twt {
+    width: 50px;
+    transition: width 0.5s;
+}
+
+.twt:hover {
+    width: 40px;
+    transition: 0.5s;
+}

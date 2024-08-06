@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+body {
+    background-color: rgb(234, 234, 234);
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+}
+
+.w-50 {
+    width: 40% !important;
+}
+
+label {
+    text-shadow: 1px 1px 1px gray;
+}
+
+input, select, textarea {
+    box-shadow: 2px 2px 9px gray;  
+}
+
+.active {
+    font-weight: bold;
+}
+
+/* Start Hover */
+.hovers {
+    position: relative;
+}
+
+.hovers ul li a.hover::before {
+    content: "";
+    background-color: black;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.hovers ul li a.hover:hover::before {
+    content: "";
+    background-color: black;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 100%;
+}
+
+nav ul li a:hover {
+    color: rgb(172, 172, 172) !important;
+    transition: 0.3s;
+}
+
+nav ul li a:active {
+    color: black;
+    font-weight: 600;
+    font-size: 18px;
+    transition: 0.5s;
+}
+/* End Hover */
+
+/* Start Button Hover */
+.contact {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.contact:hover {
+    color: black;
+    background-color: white;
+    transition: 0.5s;
+}
+/* End Button Hover */
+
+/* Submit */
+.submit {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.submit:hover {
+    color: black;
+    background-color: white;
+    transition: 0.5s;
+}
+/* Submit */
+
+@media screen and (max-width: 1000px) {
+    .end-btn{
+        float: right;
+    }
+}
