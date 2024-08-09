@@ -20,9 +20,11 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand ms-2" href="/profile">
+            {{#if isLogin}}
+            <a class="navbar-brand ms-2" href="/profile/{{user.id}}">
                 <img src="../data/image/logo.png" alt="" style="width: 50px;">
             </a>
+            {{/if}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -41,7 +43,7 @@
                     </li>
                 </ul>
                 {{#if isLogin}}
-                <div class="btn-group">
+                <div class="btn-group end-btnn">
                     <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <img src="/uploadImage/{{user.image}}" class="rounded-circle" style="width: 30px; height: 30px"
@@ -57,7 +59,7 @@
                             <hr>
                         </li>
                         <li class="ms-2 mb-2">
-                            <a class="text-decoration-none text-dark contact" href="/profile">
+                            <a class="text-decoration-none text-dark contact" href="/profile/{{user.id}}">
                                 <i class="fa-solid fa-user me-2"></i> Profile
                             </a>
                         </li>
@@ -126,7 +128,7 @@
             <div class="col-md-4 card shadow bg-body-tertiary rounded border-0">
                 <img src="/uploadImage/{{user.image}}" class="img-fluid rounded-top" style="height: 100%;">
                 <h5 class="text-center fw-bold mt-3">{{user.name}}</h5>
-                <p class="text-center">Fullstack Developer</p>
+                <p class="text-center">{{user.position}}</p>
             </div>
             <div class="col-md-8 d-flex align-items-center">
                 <div class="card-body">
@@ -160,7 +162,7 @@
                             <tr>
                                 <td class="fw-bold">Position</td>
                                 <td class="fw-bold ps-5">:</td>
-                                <td class="ps-4">Fullstack Developer</td>
+                                <td class="ps-4">{{user.position}}</td>
                             </tr>
                             <tr>
                                 <td>======</td>
@@ -170,7 +172,7 @@
                             <tr>
                                 <td class="fw-bold">City</td>
                                 <td class="fw-bold ps-5">:</td>
-                                <td class="ps-4">Bandung</td>
+                                <td class="ps-4">{{user.city}}</td>
                             </tr>
                             <tr>
                                 <td>======</td>
@@ -178,9 +180,9 @@
                                 <td>=================</td>
                             </tr>
                             <tr>
-                                <td class="fw-bold">Hoby</td>
+                                <td class="fw-bold">Hobby</td>
                                 <td class="fw-bold ps-5">:</td>
-                                <td class="ps-4">Basketball</td>
+                                <td class="ps-4">{{user.hoby}}</td>
                             </tr>
                             <tr>
                                 <td>======</td>

@@ -20,9 +20,11 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand ms-2" href="/profile">
+            {{#if isLogin}}
+            <a class="navbar-brand ms-2" href="/profile/{{user.id}}">
                 <img src="../data/image/logo.png" alt="" style="width: 50px;">
             </a>
+            {{/if}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -55,8 +57,13 @@
                         </li>
                         <li><hr></li>
                         <li class="ms-2 mb-2">
-                            <a class="text-decoration-none text-dark contact" href="/profile">
+                            <a class="text-decoration-none text-dark contact" href="/profile/{{user.id}}">
                                 <i class="fa-solid fa-user me-2"></i> Profile
+                            </a>
+                        </li>
+                        <li class="ms-2 mb-2">
+                            <a class="text-decoration-none text-dark contact" href="/profile-edit/{{user.id}}">
+                                <i class="fa-solid fa-user-doctor me-2"></i> Edit Profile
                             </a>
                         </li>
                         <li class="ms-2 mb-2">
@@ -107,6 +114,16 @@
     </nav>
 
     <!-- End Navbar -->
+    <!-- Pop UP  -->
+
+    {{#if messages.danger}}
+    <div class="alert alert-danger d-flex fw-bolder justify-content-between" role="alert">
+        {{messages.danger}}
+        <button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+
+    <!-- Pop UP  -->
     <!-- Start Login Form -->
 
     <form class="mt-5 card w-50 mx-auto rounded-4 shadow p-3 mb-5 bg-body-tertiary border-white" action="/register" method="POST" enctype="multipart/form-data">

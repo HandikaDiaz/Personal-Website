@@ -22,9 +22,11 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand ms-2" href="/profile">
+            {{#if renderUser}}
+            <a class="navbar-brand ms-2" href="/profile/{{user.id}}">
                 <img src="../data/image/logo.png" alt="" style="width: 50px;">
             </a>
+            {{/if}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -59,8 +61,13 @@
                             <hr>
                         </li>
                         <li class="ms-2 mb-2">
-                            <a class="text-decoration-none text-dark contact" href="/profile">
+                            <a class="text-decoration-none text-dark contact" href="/profile/{{user.id}}">
                                 <i class="fa-solid fa-user me-2"></i> Profile
+                            </a>
+                        </li>
+                        <li class="ms-2 mb-2">
+                            <a class="text-decoration-none text-dark contact" href="/profile-edit/{{user.id}}">
+                                <i class="fa-solid fa-user-doctor me-2"></i> Edit Profile
                             </a>
                         </li>
                         <li class="ms-2 mb-2">
@@ -115,6 +122,22 @@
     </nav>
 
     <!-- End Navbar -->
+    <!-- Pop UP  -->
+
+    {{#if messages.success}}
+    <div class="alert alert-success d-flex fw-bold justify-content-between" role="alert">
+        {{messages.success}}
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+    {{#if messages.projectSuccess}}
+    <div class="alert alert-info d-flex fw-bold justify-content-between" role="alert">
+        {{messages.projectSuccess}}
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+
+    <!-- Pop UP  -->
     <!-- Start Card -->
 
     <div class="card m-auto mt-5 shadow-lg p-4 mb-5 bg-body-tertiary rounded-3 border-0" style="max-width: 70%;">

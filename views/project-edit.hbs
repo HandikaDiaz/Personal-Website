@@ -21,9 +21,11 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand ms-2" href="/profile">
+            {{#if isLogin}}
+            <a class="navbar-brand ms-2" href="/profile/{{user.id}}">
                 <img src="../data/image/logo.png" alt="" style="width: 50px;">
             </a>
+            {{/if}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -53,8 +55,13 @@
                         </li>
                         <li><hr></li>
                         <li class="ms-2 mb-2">
-                            <a class="text-decoration-none text-dark contact" href="/profile">
+                            <a class="text-decoration-none text-dark contact" href="/profile/{{user.id}}">
                                 <i class="fa-solid fa-user me-2"></i> Profile
+                            </a>
+                        </li>
+                        <li class="ms-2 mb-2">
+                            <a class="text-decoration-none text-dark contact" href="/profile-edit/{{user.id}}">
+                                <i class="fa-solid fa-user-doctor me-2"></i> Edit Profile
                             </a>
                         </li>
                         <li class="ms-2 mb-2">
@@ -132,18 +139,18 @@
                 <label for="">Technologies</label>
                 <div class="flex-check">
                     <div class="flex-box">
-                        <label for="swift"><input type="checkbox" class="me-2" id="swift" name="swift">Swift</label>
-                        <label for="ruby"><input type="checkbox" class="me-2" id="ruby" name="ruby">Ruby</label>
+                        <label for="swift"><input type="checkbox" class="me-2" id="swift" name="swift" {{#if data.is_swift}}checked{{/if}}>Swift</label>
+                        <label for="ruby"><input type="checkbox" class="me-2" id="ruby" name="ruby" {{#if data.is_ruby}}checked{{/if}}>Ruby</label>
                     </div>
                     <div class="flex-box">
-                        <label for="phyton"><input type="checkbox" class="me-2" id="phyton" name="python">Phyton</label>
-                        <label for="javascript"><input type="checkbox" class="me-2" id="javascript" name="javascript">Javascript</label>
+                        <label for="phyton"><input type="checkbox" class="me-2" id="phyton" name="python" {{#if data.is_python}}checked{{/if}}>Phyton</label>
+                        <label for="javascript"><input type="checkbox" class="me-2" id="javascript" name="javascript" {{#if data.is_javascript}}checked{{/if}}>Javascript</label>
                     </div>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputImage" class="form-label">Upload Image</label>
-                <input class="form-control" type="file" id="inputImage" name="image">
+                <input class="form-control" type="file" id="inputImage" name="image" value="{{data.image}}">
             </div>
             <button class="btn btn-dark float-end fw-bold my-3 px-4 rounded-pill submit">Edit Project</button>
         </div>

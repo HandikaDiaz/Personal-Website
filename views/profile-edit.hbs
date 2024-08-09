@@ -21,9 +21,11 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand ms-2" href="/profile">
+            {{#if isLogin}}
+            <a class="navbar-brand ms-2" href="/profile/{{user.id}}">
                 <img src="../data/image/logo.png" alt="" style="width: 50px;">
             </a>
+            {{/if}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -50,8 +52,13 @@
                         </li>
                         <li><hr></li>
                         <li class="ms-2 mb-2">
-                            <a class="text-decoration-none text-dark contact" href="/profile">
+                            <a class="text-decoration-none text-dark contact" href="/profile/{{user.id}}">
                                 <i class="fa-solid fa-user me-2"></i> Profile
+                            </a>
+                        </li>
+                        <li class="ms-2 mb-2">
+                            <a class="text-decoration-none text-dark contact" href="/profile-edit/{{user.id}}">
+                                <i class="fa-solid fa-user-doctor me-2"></i> Edit Profile
                             </a>
                         </li>
                         <li class="ms-2 mb-2">
@@ -104,16 +111,16 @@
     <!-- End Navbar -->
     <!-- Start Contact Form -->
 
-    <form action="/profile-edit/{{data.id}}" method="POST" enctype="multipart/form-data" id="form" autocomplete="off">
+    <form action="/profile-edit/{{user.id}}" method="POST" id="form" autocomplete="off">
         <h1 class="text-center fw-semibold mt-4">Edit Your Profile</h1>
         <div class="w-50 m-auto fs-5 fw-bold">
             <div class="mb-4 mt-5">
                 <label for="inputName" class="form-label">Name</label>
-                <input class="form-control" id="inputName" type="text" placeholder="Your Name" name="name" value="{{data.name}}">
+                <input class="form-control" id="inputName" type="text" placeholder="Your Name" name="name" value="{{user.name}}">
             </div>
             <div class="mb-4 mt-4">
-                <label for="inputName" class="form-label">Age</label>
-                <input class="form-control" id="inputName" type="text" placeholder="Your Age" name="age" value="{{data.age}}">
+                <label for="inputAge" class="form-label">Age</label>
+                <input class="form-control" id="inputAge" type="text" placeholder="Your Age" name="age" value="{{user.age}}">
             </div>  
             <div class="mb-4 mt-4">
                 <label for="inputSelect" class="form-label">Position</label>
@@ -126,13 +133,13 @@
             </div>
             <div class="mb-4 mt-4">
                 <label for="inputEmail" class="form-label">City</label>
-                <input class="form-control" id="inputEmail" type="text" placeholder="Your City" name="city" value="{{data.city}}">
+                <input class="form-control" id="inputEmail" type="text" placeholder="Your City" name="city" value="{{user.city}}">
             </div>
             <div class="mb-4 mt-4">
                 <label for="inputNumber" class="form-label">Hoby</label>
-                <input class="form-control" id="inputNumber" type="text" placeholder="Your Hoby" name="hoby" value="{{data.hoby}}">
+                <input class="form-control" id="inputNumber" type="text" placeholder="Your Hoby" name="hoby" value="{{user.hoby}}">
             </div>
-            <button type="submit" class="btn btn-dark float-end fw-bold my-3 px-4 rounded-pill submit">Edit Project</button>
+            <button class="btn btn-dark float-end fw-bold my-3 px-4 rounded-pill submit">Edit Profile</button>
         </div>
     </form>
 

@@ -53,7 +53,9 @@
                                 style="width: 50px; height: 50px" alt="...">
                             <p class="ms-3">{{user.name}} <br> {{user.email}}</p>
                         </li>
-                        <li><hr></li>
+                        <li>
+                            <hr>
+                        </li>
                         <li class="ms-2 mb-2">
                             <a class="text-decoration-none text-dark contact" href="/profile">
                                 <i class="fa-solid fa-user me-2"></i> Profile
@@ -69,7 +71,9 @@
                                 <i class="fa-solid fa-address-book me-2"></i> Contact Me
                             </a>
                         </li>
-                        <li><hr></li>
+                        <li>
+                            <hr>
+                        </li>
                         <li class="ms-2 mb-2">
                             <a class="text-decoration-none text-dark contact" href="/logout">
                                 <i class="fa-solid fa-arrow-right-from-bracket me-2"></i> Logout
@@ -86,11 +90,13 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" style="width: 250px;">
                         <li class="d-flex ms-2 mt-3">
-                            <img src="../data/image/none.jpg" class="rounded-circle"
-                                style="width: 50px; height: 50px" alt="...">
+                            <img src="../data/image/none.jpg" class="rounded-circle" style="width: 50px; height: 50px"
+                                alt="...">
                             <p class="ms-3">Not Listed <br> Not Listed@game.com</p>
                         </li>
-                        <li><hr></li>
+                        <li>
+                            <hr>
+                        </li>
                         <li class="ms-3 mb-2 d-flex gap-4">
                             <a class="text-decoration-none text-dark contact" href="/register">
                                 <i class="fa-solid fa-lock me-2"></i> Register
@@ -107,9 +113,26 @@
     </nav>
 
     <!-- End Navbar -->
+    <!-- Pop UP  -->
+
+    {{#if messages.danger}}
+    <div class="alert alert-danger d-flex fw-bolder justify-content-between" role="alert">
+        {{messages.danger}}
+        <button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+    {{#if messages.success}}
+    <div class="alert alert-success d-flex fw-bolder justify-content-between" role="alert">
+        {{messages.success}}
+        <button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+
+    <!-- Pop UP  -->
     <!-- Start Login Form -->
 
-    <form class="mt-5 card w-50 mx-auto rounded-4 shadow p-3 mb-5 bg-body-tertiary border-white" action="/login" method="post">
+    <form class="mt-5 card w-50 mx-auto rounded-4 shadow p-3 mb-5 bg-body-tertiary border-white" action="/login"
+        method="post">
         <h1 class="text-center fw-semibold mt-4">Login</h1>
         <div class="w-75 mx-auto mb-4 fs-5 fw-bold">
             <div class="mb-3">
@@ -118,7 +141,8 @@
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Your Password" required>
+                <input type="password" class="form-control" id="inputPassword" name="password"
+                    placeholder="Your Password" required>
             </div>
             <div style="font-size: 15px; justify-content: space-between;" class="d-flex my-3">
                 <div class="d-flex">
