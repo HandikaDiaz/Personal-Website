@@ -61,6 +61,7 @@ app.get("/register", renderRegister);
 app.get("/change", renderChange);
 app.get("/logout", logout);
 app.get("/profile-edit/:blog_id", renderProfileEdit);
+app.get("/forgot", renderForgot)
 // Routing GET
 // ============================================================
 // Routing POST
@@ -68,7 +69,9 @@ app.post("/", upload.single("image"), addProject);
 app.post("/edit/:blog_id", upload.single("image"), editProject);
 app.post("/login", login);
 app.post("/register", upload.single("image"), register);
-app.post("/profile-edit/:blog_id", editProfile);
+app.post("/profile-edit/:blog_id", upload.single("image"), editProfile);
+app.post("/change", changePW);
+app.post("/forgot", forgot)
 // Routing POST
 // ============================================================
 // Render Function
@@ -79,7 +82,7 @@ async function renderIndex(req, res) {
         if (!isLogin || !userId) {
             res.redirect("/login");
             return;
-        }
+        };
 
         const user = `SELECT * FROM public."user" WHERE id = $1`;
         const project = `SELECT * FROM public.project WHERE user_id = $1`;
@@ -89,12 +92,22 @@ async function renderIndex(req, res) {
             db.query(project, { type: QueryTypes.SELECT, bind: [userId] })
         ]);
 
+        let startDate;
+        let year;
+        if (projectResult.length > 0 && projectResult[0].start_date) {
+            startDate = new Date(projectResult[0].start_date);
+            year = startDate.getFullYear();
+        } else {
+            startDate = new Date();
+            year = startDate.getFullYear();
+        }
 
         res.render("index", {
             data: projectResult,
-            renderUser: userResult,
+            renderUser: userResult[0],
             isLogin: isLogin,
-            user: req.session.user
+            user: req.session.user,
+            year: year
         });
     } catch (error) {
         console.error("Error in renderIndex:", error);
@@ -121,13 +134,19 @@ async function renderProfile(req, res) {
 async function renderProject(req, res) {
     try {
         const isLogin = req.session.isLogin;
-        const user = await db.query(`SELECT * FROM public.user`, {
-            type: QueryTypes.SELECT
+        const userId = req.session.userId;
+        if (!isLogin || !userId) {
+            res.redirect("/login");
+            return;
+        };
+        const user = await db.query(`SELECT * FROM public.user WHERE id = $1`, {
+            type: QueryTypes.SELECT,
+            bind: [userId]
         });
 
         res.render("project", {
             isLogin: isLogin,
-            renderUser: user,
+            renderUser: user[0],
             user: req.session.user
         });
     } catch (error) {
@@ -137,13 +156,19 @@ async function renderProject(req, res) {
 async function renderTestimonial(req, res) {
     try {
         const isLogin = req.session.isLogin;
-        const user = await db.query(`SELECT * FROM public.user`, {
-            type: QueryTypes.SELECT
+        const userId = req.session.userId;
+        if (!isLogin || !userId) {
+            res.redirect("/login");
+            return;
+        }
+        const user = await db.query(`SELECT * FROM public.user WHERE id = $1`, {
+            type: QueryTypes.SELECT,
+            bind: [userId]
         });
 
         res.render("testimonial", {
             isLogin: isLogin,
-            renderUser: user,
+            renderUser: user[0],
             user: req.session.user
         });
     } catch (error) {
@@ -153,13 +178,15 @@ async function renderTestimonial(req, res) {
 async function renderContact(req, res) {
     try {
         const isLogin = req.session.isLogin;
-        const user = await db.query(`SELECT * FROM public.user`, {
-            type: QueryTypes.SELECT
+        const userId = req.session.userId;
+        const user = await db.query(`SELECT * FROM public.user WHERE id = $1`, {
+            type: QueryTypes.SELECT,
+            bind: [userId]
         });
 
         res.render("contact", {
             isLogin: isLogin,
-            renderUser: user,
+            renderUser: user[0],
             user: req.session.user
         });
     } catch (error) {
@@ -170,16 +197,18 @@ async function renderProjectDetail(req, res) {
     try {
         const isLogin = req.session.isLogin;
         const id = req.params.blog_id;
+        const userId = req.session.userId;
         const blogs = await db.query(`SELECT * FROM project WHERE id = ${id}`, {
             type: QueryTypes.SELECT
         });
-        const user = await db.query(`SELECT * FROM public.user`, {
-            type: QueryTypes.SELECT
+        const user = await db.query(`SELECT * FROM public.user WHERE id = $1`, {
+            type: QueryTypes.SELECT,
+            bind: [userId]
         });
 
         res.render("project-detail", {
             data: blogs[0],
-            renderUser: user,
+            renderUser: user[0],
             isLogin: isLogin,
             user: req.session.user
         });
@@ -191,16 +220,18 @@ async function renderEditProject(req, res) {
     try {
         const isLogin = req.session.isLogin
         const id = req.params.blog_id;
+        const userId = req.session.userId;
         const blogs = await db.query(`SELECT * FROM project WHERE id = ${id}`, {
             type: QueryTypes.SELECT
         });
-        const user = await db.query(`SELECT * FROM public.user`, {
-            type: QueryTypes.SELECT
+        const user = await db.query(`SELECT * FROM public.user WHERE id = $1`, {
+            type: QueryTypes.SELECT,
+            bind: [userId]
         });
 
         res.render("project-edit", {
             data: blogs[0],
-            renderUser: user,
+            renderUser: user[0],
             isLogin: isLogin,
             user: req.session.user
         });
@@ -233,11 +264,17 @@ async function renderRegister(req, res) {
         console.log(error);
     };
 };
-function renderChange(req, res) {
+async function renderChange(req, res) {
     const isLogin = req.session.isLogin;
+    const userId = req.session.userId;
+    const user = await db.query(`SELECT * FROM public.user WHERE id = $1`, {
+        type: QueryTypes.SELECT,
+        bind: [userId]
+    });
 
     res.render("changePW", {
         isLogin: isLogin,
+        renderUser: user[0],
         user: req.session.user
     })
 };
@@ -245,16 +282,18 @@ async function renderProfileEdit(req, res) {
     try {
         const isLogin = req.session.isLogin;
         const id = req.params.blog_id;
+        const userId = req.session.userId;
         const blogs = await db.query(`SELECT * FROM public.user WHERE id = ${id}`, {
             type: QueryTypes.SELECT
         });
-        const user = await db.query(`SELECT * FROM public.user`, {
-            type: QueryTypes.SELECT
-        })
+        const user = await db.query(`SELECT * FROM public.user WHERE id = $1`, {
+            type: QueryTypes.SELECT,
+            bind: [userId]
+        });
 
         res.render("profile-edit", {
             data: blogs[0],
-            renderUser: user,
+            renderUser: user[0],
             isLogin: isLogin,
             user: req.session.user
         })
@@ -262,6 +301,9 @@ async function renderProfileEdit(req, res) {
         console.log(error);
 
     }
+};
+async function renderForgot(req, res) {
+    res.render("forgot")
 };
 // Render Function
 // ============================================================
@@ -334,7 +376,7 @@ async function addProject(req, res) {
         res.redirect("/");
     } catch (error) {
         console.log(error);
-        req.flash("success", "Project failed to add successfully!")
+        req.flash("danger", "Project failed to add successfully!")
     };
 };
 async function editProject(req, res) {
@@ -378,7 +420,14 @@ async function editProject(req, res) {
         const checkJavascript = '<i class="fa-brands fa-js p-2 g-col-6"></i>';
 
         const id = req.params.blog_id;
-        const userId = req.session.userId
+        const userId = req.session.userId;
+
+        const oldImage = `SELECT image from public.project WHERE id = $1 AND user_id = $2`;
+        const check = await db.query(oldImage, {
+            type: QueryTypes.SELECT,
+            bind: [id, userId]
+        });
+
         const newProject = {
             project: req.body.project,
             start: req.body.startDate,
@@ -388,8 +437,8 @@ async function editProject(req, res) {
             ruby: req.body.ruby ? checkRuby : null,
             python: req.body.python ? checkPhyton : null,
             javascript: req.body.javascript ? checkJavascript : null,
-            image: req.file ? req.file.filename : null,
-            duration: duration,
+            image: req.file ? req.file.filename : check[0].image,
+            duration: duration
         };
 
         const values = [
@@ -458,7 +507,7 @@ async function login(req, res) {
         });
 
         if (user.length === 0) {
-            req.flash("danger", "Email not found");
+            req.flash("danger", "This email does not exist!");
             return res.redirect("/login");
         }
 
@@ -466,8 +515,8 @@ async function login(req, res) {
 
         const checkPassword = await bcrypt.compare(req.body.password, users.password)
 
-        if(!checkPassword) {
-            req.flash("danger", "Password is wrong!")
+        if (!checkPassword) {
+            req.flash("danger", "Your password is wrong!")
             return res.redirect("/login")
         }
 
@@ -477,10 +526,10 @@ async function login(req, res) {
         req.session.save((err) => {
             if (err) {
                 console.log(err);
-                req.flash("danger", "Login failed due to session error");
+                req.flash("danger", "Login failed due to session error!");
                 return res.redirect("/login");
             }
-            req.flash("success", "Success to login");
+            req.flash("success", "Success to login!");
             return res.redirect("/");
         });
     } catch (error) {
@@ -498,7 +547,7 @@ async function register(req, res) {
         });
 
         if (userExists.length > 0) {
-            req.flash("danger", "Email already registered");
+            req.flash("danger", "Sorry, your account already exists");
             return res.redirect("/register")
         } else {
             const salt = bcrypt.genSaltSync(10);
@@ -529,17 +578,17 @@ async function register(req, res) {
             req.session.isLogin = true;
             req.session.save((err) => {
                 if (err) {
-                    req.flash("danger", "Registration failed, please try again");
+                    req.flash("danger", "Your account failed to create!! Please fill in your account correctly!!");
                     return res.redirect("/register");
                 }
-                req.flash("success", "Success to register");
-                res.redirect("/");
+                req.flash("success", "Your account has been successfully created!! Please log in to your account!! ");
+                res.redirect("/login");
             });
 
         };
     } catch (error) {
         console.log(error);
-        req.flash("danger", "Registration failed, please try again");
+        req.flash("danger", "Your account failed to create!! Please fill in your account correctly!!");
         res.redirect("/register");
     };
 };
@@ -547,7 +596,7 @@ async function logout(req, res) {
     try {
         req.flash("success", "Successfully logged out");
         req.session.destroy(() => {
-            res.redirect("/login");
+            return res.redirect("/login");
         });
     } catch (error) {
         console.log(error);
@@ -558,16 +607,20 @@ async function logout(req, res) {
 async function editProfile(req, res) {
     try {
         const id = req.params.blog_id;
+        const oldImage = `SELECT image FROM public.user WHERE id = $1`
+        const check = await db.query(oldImage, {
+            type: QueryTypes.SELECT,
+            bind: [id]
+        });
+
         const editProfile = {
             name: req.body.name,
             age: req.body.age,
             city: req.body.city,
             hoby: req.body.hoby,
-            position: req.body.position
+            position: req.body.position,
+            image: req.file ? req.file.filename : check[0].image,
         };
-
-        console.log(editProfile);
-
 
         const values = [
             editProfile.name,
@@ -575,6 +628,7 @@ async function editProfile(req, res) {
             editProfile.city,
             editProfile.hoby,
             editProfile.position,
+            editProfile.image,
             id
         ];
 
@@ -584,8 +638,9 @@ async function editProfile(req, res) {
             age = $2,
             city = $3,
             hoby = $4,
-            position = $5
-            WHERE id = $6;`
+            position = $5,
+            image = $6
+            WHERE id = $7;`
 
         console.log("data ter update", updateProfile);
 
@@ -598,6 +653,70 @@ async function editProfile(req, res) {
     } catch (error) {
         console.log(error);
     }
+};
+async function changePW(req, res) {
+    try {
+        const userId = req.session.user.id;
+        const userLogin = `
+        SELECT * FROM public."user" WHERE id = $1`;
+        const user = await db.query(userLogin, {
+            type: QueryTypes.SELECT,
+            bind: [userId]
+        });
+        const users = user[0];
+        const checkPassword = await bcrypt.compare(req.body.oldPassword, users.password);
+
+        if (!checkPassword) {
+            req.flash("danger", "Your password is wrong!")
+            return res.redirect("/change")
+        } else {
+            const id = req.session.userId;
+            const salt = bcrypt.genSaltSync(10);
+            const passwordHash = await bcrypt.hash(req.body.newPassword, salt);
+            const inputPw = [passwordHash, id]
+            const updatePw = `UPDATE public.user SET
+            password = $1 WHERE id = $2`
+
+            await db.query(updatePw, {
+                bind: inputPw
+            })
+            req.flash("success", "Password changed successfully");
+            return res.redirect("/");
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+async function forgot(req, res) {
+    try {
+        const dataOfEmail = `SELECT * FROM public.user WHERE email = $1`
+        const inputEmail = await db.query(dataOfEmail, {
+            type: QueryTypes.SELECT,
+            bind: [req.body.email]
+        });
+
+        if(!inputEmail) {
+            req.flash("danger", "This email does not exist!");
+            return res.redirect("/forgot");
+        } else {
+            const id = inputEmail[0].id;
+            const salt = bcrypt.genSaltSync(10);
+            const passwordHash = await bcrypt.hash(req.body.password, salt);
+            const inputPw = [passwordHash, id]
+            const updatePw = `UPDATE public.user SET
+            password = $1 WHERE id = $2`
+
+            await db.query(updatePw, {
+                bind: inputPw
+            });
+            req.flash("success", "Password changed successfully!");
+            return res.redirect("/login");
+        };
+    } catch (error) {
+        console.log(error);
+        res.redirect("/forgot")
+    };
 };
 // Post Function
 // ============================================================

@@ -35,3 +35,12 @@
     margin: -20px 30px;
     text-align: end;
 }
+
+.test-hov button {
+    transition: color 0.5s, background-color 0.5s;
+}
+
+.test-hov button:hover {
+    color: black;
+    background-color: white;
+}

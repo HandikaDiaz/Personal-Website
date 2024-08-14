@@ -25,8 +25,6 @@ function getData(){
         return;
     }
 
-    console.log(group);
-
     let myEmail = "handikaalexandriadiaz@gmail.com"
     let mySubject = "Developer"
     let sendMassage = document.createElement("a");

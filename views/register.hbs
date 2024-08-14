@@ -20,11 +20,9 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            {{#if isLogin}}
-            <a class="navbar-brand ms-2" href="/profile/{{user.id}}">
+            <a class="navbar-brand ms-2" href="">
                 <img src="../data/image/logo.png" alt="" style="width: 50px;">
             </a>
-            {{/if}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -43,7 +41,7 @@
                     </li>
                 </ul>
                 {{#if isLogin}}
-                <div class="btn-group">
+                <div class="btn-group end-btn">
                     <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <img src="/uploadImage/{{user.image}}" class="rounded-circle" style="width: 30px; height: 30px"
@@ -85,7 +83,7 @@
                     </ul>
                 </div>
                 {{else}}
-                <div class="btn-group">
+                <div class="btn-group end-btn">
                     <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <img src="../data/image/none.jpg" class="rounded-circle" style="width: 30px; height: 30px"

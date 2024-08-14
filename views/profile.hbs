@@ -43,17 +43,28 @@
                     </li>
                 </ul>
                 {{#if isLogin}}
-                <div class="btn-group end-btnn">
+                <div class="btn-group end-btn">
                     <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img src="/uploadImage/{{user.image}}" class="rounded-circle" style="width: 30px; height: 30px"
+                        <i class="fa-solid fa-inbox fs-5"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="width: 250px; height: 95px;">
+                        <li>
+                            <p class="text-center mt-4">You don't have a message</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-group end-btn">
+                    <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="/uploadImage/{{data.image}}" class="rounded-circle" style="width: 30px; height: 30px"
                             alt="...">
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" style="width: 250px;">
                         <li class="d-flex ms-2 mt-3">
-                            <img src="/uploadImage/{{user.image}}" class="rounded-circle"
+                            <img src="/uploadImage/{{data.image}}" class="rounded-circle"
                                 style="width: 50px; height: 50px" alt="...">
-                            <p class="ms-3">{{user.name}} <br> {{user.email}}</p>
+                            <p class="ms-3">{{data.name}} <br> {{data.email}}</p>
                         </li>
                         <li>
                             <hr>
@@ -69,7 +80,7 @@
                             </a>
                         </li>
                         <li class="ms-2 mb-2">
-                            <a class="text-decoration-none text-dark contact" href="">
+                            <a class="text-decoration-none text-dark contact" href="/change">
                                 <i class="fa-solid fa-lock me-2"></i> Change Password
                             </a>
                         </li>
@@ -126,9 +137,9 @@
     <div class="card m-auto mt-5 shadow-lg p-4 mb-5 bg-body-tertiary rounded-3 border-0" style="max-width: 70%;">
         <div class="row g-0">
             <div class="col-md-4 card shadow bg-body-tertiary rounded border-0">
-                <img src="/uploadImage/{{user.image}}" class="img-fluid rounded-top" style="height: 100%;">
-                <h5 class="text-center fw-bold mt-3">{{user.name}}</h5>
-                <p class="text-center">{{user.position}}</p>
+                <img src="/uploadImage/{{data.image}}" class="img-fluid rounded-top" style="height: 100%;">
+                <h5 class="text-center fw-bold mt-3">{{data.name}}</h5>
+                <p class="text-center">{{data.position}}</p>
             </div>
             <div class="col-md-8 d-flex align-items-center">
                 <div class="card-body">
@@ -137,57 +148,57 @@
                             <tr>
                                 <td>======</td>
                                 <td></td>
-                                <td>=================</td>
+                                <td>===============</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Name</td>
                                 <td class="fw-bold ps-5">:</td>
-                                <td class="ps-4">{{user.name}}</td>
+                                <td class="ps-4">{{data.name}}</td>
                             </tr>
                             <tr>
                                 <td>======</td>
                                 <td></td>
-                                <td>=================</td>
+                                <td>===============</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Age</td>
                                 <td class="fw-bold ps-5">:</td>
-                                <td class="ps-4">{{user.age}}</td>
+                                <td class="ps-4">{{data.age}}</td>
                             </tr>
                             <tr>
                                 <td>======</td>
                                 <td></td>
-                                <td>=================</td>
+                                <td>===============</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Position</td>
                                 <td class="fw-bold ps-5">:</td>
-                                <td class="ps-4">{{user.position}}</td>
+                                <td class="ps-4">{{data.position}}</td>
                             </tr>
                             <tr>
                                 <td>======</td>
                                 <td></td>
-                                <td>=================</td>
+                                <td>===============</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">City</td>
                                 <td class="fw-bold ps-5">:</td>
-                                <td class="ps-4">{{user.city}}</td>
+                                <td class="ps-4">{{data.city}}</td>
                             </tr>
                             <tr>
                                 <td>======</td>
                                 <td></td>
-                                <td>=================</td>
+                                <td>===============</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Hobby</td>
                                 <td class="fw-bold ps-5">:</td>
-                                <td class="ps-4">{{user.hoby}}</td>
+                                <td class="ps-4">{{data.hoby}}</td>
                             </tr>
                             <tr>
                                 <td>======</td>
                                 <td></td>
-                                <td>=================</td>
+                                <td>===============</td>
                             </tr>
                         </tbody>
                     </table>

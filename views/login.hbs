@@ -20,7 +20,7 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand ms-2" href="/profile">
+            <a class="navbar-brand ms-2" href="">
                 <img src="../data/image/logo.png" alt="" style="width: 50px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -82,7 +82,7 @@
                     </ul>
                 </div>
                 {{else}}
-                <div class="btn-group">
+                <div class="btn-group end-btn">
                     <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <img src="../data/image/none.jpg" class="rounded-circle" style="width: 30px; height: 30px"
@@ -127,6 +127,7 @@
         <button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {{/if}}
+    {{log messages}}
 
     <!-- Pop UP  -->
     <!-- Start Login Form -->
@@ -150,7 +151,7 @@
                     <label for="me">Remember Me</label>
                 </div>
                 <div>
-                    <a class="text-decoration-none text-dark" href="/login">Forgot Password?</a>
+                    <a class="text-decoration-none text-dark" href="/forgot">Forgot Password?</a>
                 </div>
             </div>
             <button type="submit" class="btn btn-dark my-3 w-100 submit">Submit</button>

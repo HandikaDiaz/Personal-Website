@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             {{#if isLogin}}
-            <a class="navbar-brand ms-2" href="/profile/{{user.id}}">
+            <a class="navbar-brand ms-2" href="/profile/{{renderUser.id}}">
                 <img src="../data/image/logo.png" alt="" style="width: 50px;">
             </a>
             {{/if}}
@@ -41,31 +41,42 @@
                     </li>
                 </ul>
                 {{#if isLogin}}
-                <div class="btn-group">
+                <div class="btn-group end-btn">
                     <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img src="/uploadImage/{{user.image}}" class="rounded-circle" style="width: 30px; height: 30px"
+                        <i class="fa-solid fa-inbox fs-5"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="width: 250px; height: 95px;">
+                        <li>
+                            <p class="text-center mt-4">You don't have a message</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-group end-btn">
+                    <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="/uploadImage/{{renderUser.image}}" class="rounded-circle" style="width: 30px; height: 30px"
                             alt="...">
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" style="width: 250px;">
                         <li class="d-flex ms-2 mt-3">
-                            <img src="/uploadImage/{{user.image}}" class="rounded-circle"
+                            <img src="/uploadImage/{{renderUser.image}}" class="rounded-circle"
                                 style="width: 50px; height: 50px" alt="...">
-                            <p class="ms-3">{{user.name}} <br> {{user.email}}</p>
+                            <p class="ms-3">{{renderUser.name}} <br> {{renderUser.email}}</p>
                         </li>
                         <li><hr></li>
                         <li class="ms-2 mb-2">
-                            <a class="text-decoration-none text-dark contact" href="/profile/{{user.id}}">
+                            <a class="text-decoration-none text-dark contact" href="/profile/{{renderUser.id}}">
                                 <i class="fa-solid fa-user me-2"></i> Profile
                             </a>
                         </li>
                         <li class="ms-2 mb-2">
-                            <a class="text-decoration-none text-dark contact" href="/profile-edit/{{user.id}}">
+                            <a class="text-decoration-none text-dark contact" href="/profile-edit/{{renderUser.id}}">
                                 <i class="fa-solid fa-user-doctor me-2"></i> Edit Profile
                             </a>
                         </li>
                         <li class="ms-2 mb-2">
-                            <a class="text-decoration-none text-dark contact" href="">
+                            <a class="text-decoration-none text-dark contact" href="/change">
                                 <i class="fa-solid fa-lock me-2"></i> Change Password
                             </a>
                         </li>

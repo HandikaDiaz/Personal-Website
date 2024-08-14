@@ -21,7 +21,7 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand ms-2" href="/profile">
+            <a class="navbar-brand ms-2" href="/profile/{{renderUser.id}}">
                 <img src="../data/image/logo.png" alt="" style="width: 50px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -38,29 +38,40 @@
                     </li>
                 </ul>
                 {{#if isLogin}}
-                <div class="btn-group">
+                <div class="btn-group end-btn">
                     <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img src="/uploadImage/{{user.image}}" class="rounded-circle" style="width: 30px; height: 30px"
+                        <i class="fa-solid fa-inbox fs-5"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="width: 250px; height: 95px;">
+                        <li>
+                            <p class="text-center mt-4">You don't have a message</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-group end-btn">
+                    <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="/uploadImage/{{renderUser.image}}" class="rounded-circle" style="width: 30px; height: 30px"
                             alt="...">
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" style="width: 250px;">
                         <li class="d-flex ms-2 mt-3">
-                            <img src="/uploadImage/{{user.image}}" class="rounded-circle"
+                            <img src="/uploadImage/{{renderUser.image}}" class="rounded-circle"
                                 style="width: 50px; height: 50px" alt="...">
-                            <p class="ms-3">{{user.name}} <br> {{user.email}}</p>
+                            <p class="ms-3">{{renderUser.name}} <br> {{renderUser.email}}</p>
                         </li>
                         <li>
                             <hr>
                         </li>
                         <li class="ms-2 mb-2">
-                            <a class="text-decoration-none text-dark contact" href="/profile">
+                            <a class="text-decoration-none text-dark contact" href="/profile/{{renderUser.id}}">
                                 <i class="fa-solid fa-user me-2"></i> Profile
                             </a>
                         </li>
                         <li class="ms-2 mb-2">
-                            <a class="text-decoration-none text-dark contact" href="">
-                                <i class="fa-solid fa-lock me-2"></i> Change Password
+                            <a class="text-decoration-none text-dark contact" href="/profile-edit/{{renderUser.id}}">
+                                <i class="fa-solid fa-user-doctor me-2"></i> Edit Profile
                             </a>
                         </li>
                         <li class="ms-2 mb-2">
@@ -110,18 +121,28 @@
     </nav>
 
     <!-- End Navbar -->
+    <!-- Pop UP  -->
+
+    {{#if messages.danger}}
+    <div class="alert alert-danger d-flex fw-bold justify-content-between" role="alert">
+        {{messages.danger}}
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+
+    <!-- Pop UP  -->
     <!-- Start Contact Form -->
 
-    <form class="mt-5 card w-50 mx-auto rounded-4 shadow p-3 mb-5 bg-body-tertiary border-white" action="/login" method="post">
+    <form class="mt-5 card w-50 mx-auto rounded-4 shadow p-3 mb-5 bg-body-tertiary border-white" action="/change" method="post">
         <h1 class="text-center fw-semibold mt-4">Change Password</h1>
         <div class="w-75 mx-auto mb-4 fs-5 fw-bold">
             <div class="mb-3">
                 <label for="inputEmail" class="form-label">Old Password</label>
-                <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Your Password" required>
+                <input type="password" class="form-control" id="inputEmail" name="oldPassword" placeholder="Your Password" required>
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">New Password</label>
-                <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Your New Password" required>
+                <input type="password" class="form-control" id="inputPassword" name="newPassword" placeholder="Your New Password" required>
             </div>
             <div style="font-size: 15px; justify-content: space-between;" class="d-flex my-3">
                 <div class="d-flex">
